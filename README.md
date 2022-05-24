@@ -8,7 +8,7 @@ There are two types of NSO installation available Local vs System, I have create
 
 Instead of writing the step-by-step process required for Cisco NSO local install, I have created two files `Dockerfile` and `Makefile` and they will install and run the docker container respectively. To see the Local Install process, please check out this [link]( https://developer.cisco.com/docs/nso/#!getting-and-installing-nso/installation).
 
-Lastly, I have created this container on my DevNet Expert Candidate Workstation (CWS) Ubunut 20.04 for my DevNet Expert studies, but you can build this on other operation systems running docker.
+Lastly, I have created this container on my DevNet Expert Candidate Workstation (CWS) Ubunut 20.04 for my DevNet Expert studies, but you can build this on other operating systems running docker.
 
 ## Installation 
 
@@ -276,9 +276,9 @@ User admin last logged in 2022-05-23T19:30:06.270458+00:00, to 63f8d1977f88, fro
 admin connected from 172.17.0.1 using ssh on 63f8d1977f88
 admin@ncs> 
 ```
-![App Screenshot](https://github.com/muhammad-rafi/cisco-nso-docker/images/bigip_topology.PNG)
+![App Screenshot](https://github.com/muhammad-rafi/cisco-nso-docker/blob/main/images/nso-webui_1.png)
 
-![App Screenshot](https://github.com/muhammad-rafi/cisco-nso-docker/images/bigip_topology.PNG)
+![App Screenshot](https://github.com/muhammad-rafi/cisco-nso-docker/blob/main/images/nso-webui_2.png)
 
 ## Author
 
