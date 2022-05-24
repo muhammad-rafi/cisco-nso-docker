@@ -50,20 +50,3 @@ COPY ${pwd}/packages/ncs-5.5-cisco* /root/nso-5.5/packages/neds/
 
 # Expose port required for Cisco NSO Server
 EXPOSE 2022 2024 8080 8888
-
-# To build Cisco NSO container and run this image 
-# $ docker build -t cisco-nso-dev:0.1 .
-# $ docker run --name cisco-nso-dev -p 2024:2024 -p8080:8080 -itd cisco-nso-dev:0.1
-
-# Once nso container is built, go to the contrain and create an Cisco NSO instance 'ncs-run'
-# $ ncs-setup --dest $HOME/ncs-run
-
-# Go to the nso instance 'ncs-run' directory and start Cisco NSO instance
-# $ ncs-setup --dest $HOME/ncs-run
-# $ cd ncs-run 
-
-# Finally start the Cisco NSO instance 
-# $ ncs
-
-# Verify instance has been started
-# $ ncs --status | grep status
