@@ -10,6 +10,8 @@ Instead of writing the step-by-step process required for Cisco NSO local install
 
 Lastly, I have created this container on my DevNet Expert Candidate Workstation (CWS) Ubunut 20.04 for my DevNet Expert studies, but you can build this on other operation systems running docker.
 
+**DISCLAIMER** This repository was created by myself to practice with NSO in the Lab environment and should NOT be used for production use. This is not endorsed by the Cisco Systems.
+
 ## Installation 
 
 Before you start, you need to make sure you have Cisco NSO installer and Network Element Drivers (NEDs) downloaded already from [Cisco Developer website]( https://developer.cisco.com/docs/nso/#!getting-and-installing-nso/download-your-nso-free-trial-installer-and-cisco-neds). Latest version for both is 5.7 at the time of writing this document. However, I used 5.5 in this document. 
