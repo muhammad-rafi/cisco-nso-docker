@@ -280,6 +280,11 @@ admin@ncs>
 
 ![App Screenshot](https://github.com/muhammad-rafi/cisco-nso-docker/blob/main/images/nso-webui_2.png)
 
+## References
+
+[Installing Cisco NSO](https://github.com/hpreston/nso-getting-started/blob/master/01-installing-nso.md)
+[Getting and Installing NSO](https://developer.cisco.com/docs/nso/#!getting-and-installing-nso)
+
 ## Author
 
 [Muhammad Rafi](https://www.linkedin.com/in/muhammad-rafi-0a37a248/)
