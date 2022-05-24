@@ -283,6 +283,7 @@ admin@ncs>
 ## References
 
 [Installing Cisco NSO](https://github.com/hpreston/nso-getting-started/blob/master/01-installing-nso.md)
+
 [Getting and Installing NSO](https://developer.cisco.com/docs/nso/#!getting-and-installing-nso)
 
 ## Author
