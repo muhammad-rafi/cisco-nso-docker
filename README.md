@@ -47,8 +47,9 @@ total 187532
 -rwxr-xr-x 1 expert expert 192008887 May 21 13:04 nso-5.5.linux.x86_64.installer.bin
 drwxrwxr-x 2 expert expert      4096 May 23 12:28 packages
 ```
-You may notice that I have `nso-5.5.linux.x86_64.installer.bin` in my `nso` directory, however, when you downloaded the installer, it has *.signed.bin extention. This is becuase after dowloading the NSO installer and NEDs, we need to extract them. 
-To extract the NSO installer 
+You may notice that I have `nso-5.5.linux.x86_64.installer.bin` in my `nso` directory, however, when you downloaded the installer, it has *.signed.bin extention. This is becuase after dowloading the NSO installer and NEDs, we need to extract them.
+
+To extract the NSO installer, run `sh nso-5.5.linux.x86_64.signed.bin`
 ```bash 
 sh nso-5.5.linux.x86_64.signed.bin 
 
@@ -63,7 +64,7 @@ sh nso-5.5.linux.x86_64.signed.bin
  Successfully fetched a public key from tailf.cer.
  Successfully verified the signature of nso-5.5.linux.x86_64.installer.bin using tailf.cer
  ```
- This will generate the folloiwng files, however you may delete all of them except installer binary file (nso-5.5.darwin.x86_64.installer.bin)
+ This will generate the folloiwng files, however you may delete all of them except installer binary file (nso-5.5.linux.x86_64.installer.bin)
  ```bash
 README.signature
 cisco_x509_verify_release.py
