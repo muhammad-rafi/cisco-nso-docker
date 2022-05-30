@@ -70,7 +70,7 @@ README.signature
 cisco_x509_verify_release.py
 cisco_x509_verify_release.py3
 nso-5.5.linux.x86_64.installer.bin 
-nso-5.3.linux.x86_64.installer.bin.signature
+nso-5.5.linux.x86_64.installer.bin.signature
 nso-5.5.linux.x86_64.signed.bin
 tailf.cer
  ```
@@ -241,7 +241,7 @@ cisco-nx-cli-5.21
 ```bash
 root@63f8d1977f88:~# source $HOME/nso-5.5/ncsrc
 root@63f8d1977f88:~# ncs-setup --package ~/nso-5.5/packages/neds/cisco-ios-cli-6.69 \
->    --package ~/nso-5.3/packages/neds/cisco-nx-cli-5.21 \
+>    --package ~/nso-5.5/packages/neds/cisco-nx-cli-5.21 \
 >    --dest ncs-instance
 root@63f8d1977f88:~# 
 root@63f8d1977f88:~# cd ncs-instance/
