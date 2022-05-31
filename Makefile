@@ -1,6 +1,6 @@
 .PHONY: run
 run:
-	docker run -itd --name cisco-nso-dev \
+	docker run -itd --hostname nso --name cisco-nso-dev \
                    -p 2024:2024 \
                    -p 8080:8080 \
                    cisco-nso-dev:0.1
