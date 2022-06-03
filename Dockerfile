@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
         libxml2-utils \
         libxml2 \
         default-jdk \
+        build-essential \
         ant \
         net-tools 
 
