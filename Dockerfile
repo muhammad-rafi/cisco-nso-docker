@@ -8,6 +8,9 @@ MAINTAINER Muhammad Rafi
 # Metadata for this image
 LABEL image.authors="murafi@cisco.com" image.verions="0.1"
 
+# Set environment variable for the zero interaction
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Update and install required packages to build Cisco NSO 
 RUN apt-get update && apt-get install -y \
         openssh-client \ 
@@ -24,6 +27,13 @@ RUN apt-get update && apt-get install -y \
 #RUN useradd -rm -d /home/mrafi -s /bin/bash -g root -G sudo -u 1001 mrafi
 #USER mrafi
 #WORKDIR /home/mrafi
+
+# Install Python3 and PIP (optional)
+RUN apt-get update \
+    && apt-get install -y python3-pip python3-dev \
+    && cd /usr/local/bin \
+    && ln -s /usr/bin/python3 python \
+    && pip3 install --upgrade pip
 
 # Working directory in use to perform the further actions (DO NOT USE IN PROD ENV ! )
 WORKDIR /root
