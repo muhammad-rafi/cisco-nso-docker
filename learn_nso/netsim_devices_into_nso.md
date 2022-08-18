@@ -193,10 +193,12 @@ root@nso:~/ncs-instance#
 root@nso:~/ncs-instance# ncs-netsim ncs-xml-init > netsim_devices.xml
 root@nso:~/ncs-instance# 
 ```
-If you see a below error when exporting, make sure you have `xsltproc` installed. 
+If you see a below error when exporting, make sure you have `xsltproc` installed.
+
 `/nso-5.5/bin/ncs-netsim: line 897: xsltproc : command not found`
 
 Install `xsltproc` in case of above error and run the export again.
+
 `root@nso:~/ncs-instance# apt-get install -y xsltproc`
 
 Next step to get the devices add on NSO via CLI. 
