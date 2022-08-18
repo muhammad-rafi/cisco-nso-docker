@@ -1,4 +1,7 @@
-What is NSO Service Package 
+# Create NSO `python-and-template` service package
+
+### What is NSO Service Package 
+
 NSO Packages contain data models and code for a specific function. It might be a NED for a specific device, a service application like MPLS VPN, a WebUI customization package etc. Packages can be added, removed and upgraded in run-time.
 
 In this example, I am going to create `python-and-template` based service pacakge for Loopack Interface service, named `nso-loopback-service`, however there are some other options available to create a service package. You can check out the other service package options with below command using `-h` or `--help` flag.

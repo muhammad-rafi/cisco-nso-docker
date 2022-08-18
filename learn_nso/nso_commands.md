@@ -1,4 +1,4 @@
-# Some NSO Useful Commands 
+# Some Useful Commands for the NSO
 
 Login to NSO CLI mode from the NSO bash `ncs_cli -C -u admin`
 
