@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
         libexpat1 \
         libxml2-utils \
         libxml2 \
+        xsltproc \
         default-jdk \
         build-essential \
         ant \

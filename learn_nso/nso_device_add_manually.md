@@ -1,6 +1,7 @@
-# How to add and delete netsim devices in NSO Instance
+# How to add, delete and load netsim devices into NSO Instance
 
 ### Go to your NSO instance 
+
 ```bash
 root@nso:~# cd ncs-instance/
 root@nso:~/ncs-instance# 
@@ -157,9 +158,166 @@ drwxr-xr-x 3 root root  4096 May 31 12:14 target
 root@nso:~/ncs-instance# 
 ```
 
+Next step is to load the devices on NSO.
+
+# Load Netsim devices into NSO
+
+### Go to your NSO instance 
+
+```bash
+root@nso:~# cd ncs-instance/
+root@nso:~/ncs-instance# 
+```
+
+### Create a Network of IOS devices 'R0 and R1' using 'cisco-ios-cli-6.69' ned
+
+Since we deleted the devices earlier in above step, let's quickly create two ios `netsim` devices `R0` and `R1` and start the netsim devices.
+
+```bash
+root@nso:~/ncs-instance# ncs-netsim create-network packages/cisco-ios-cli-6.69 2 R
+DEVICE R0 CREATED
+DEVICE R1 CREATED
+root@nso:~/ncs-instance# 
+```
+
+```bash
+root@nso:~/ncs-instance# ncs-netsim start
+DEVICE R0 OK STARTED
+DEVICE R1 OK STARTED
+root@nso:~/ncs-instance# 
+```
+
+### Export netsim devices connection data to NSO
+
+```bash
+root@nso:~/ncs-instance# ncs-netsim ncs-xml-init > netsim_devices.xml
+root@nso:~/ncs-instance# 
+```
+If you see a below error when exporting, make sure you have `xsltproc` installed. 
+`/nso-5.5/bin/ncs-netsim: line 897: xsltproc : command not found`
+
+Install `xsltproc` in case of above error and run the export again.
+`root@nso:~/ncs-instance# apt-get install -y xsltproc`
+
+Next step to get the devices add on NSO via CLI. 
+
+### Login to the nso CLI, load merge the netsim devices and commit the change
+
+`ncs_cli -u admin -C`
+`load merge netsim_devices.xml`
+
+```bash
+root@nso:~/ncs-instance# ncs_cli -u admin -C
+
+User admin last logged in 2022-08-18T13:07:29.919317+00:00, to nso, from 127.0.0.1 using cli-console
+admin connected from 127.0.0.1 using console on nso
+admin@ncs# config t
+Entering configuration mode terminal
+admin@ncs(config)# load merge netsim_devices.xml
+Loading.
+2.16 KiB parsed in 0.01 sec (165.08 KiB/sec)
+admin@ncs(config)# 
+admin@ncs(config)# commit   
+Commit complete.
+admin@ncs(config)# end     
+admin@ncs# 
+```
+
+### Check the full configuration for these device e.g. R0
+
+```bash
+admin@ncs(config)# show full-configuration devices device R0 
+devices device R0
+ address   127.0.0.1
+ port      10022
+ ssh host-key ssh-rsa
+  key-data "AAAAB3NzaC1yc2EAAAADAQABAAABgQDAfCkCcFwwdlfNv82l4H75i2/4f+1C61aR4KtiNihs\nGEPhS7U+56TQUnYL9Ho3NZSJ+pD2e+9h6vgXdK71zlFc8eSIdaZWgmdKd6Y7PrYXu//+VDBc\n7Jq4olYAz7PaC1Dl35/ZkEswXhuPY7f7tf5MV3578bZ4dNGYIMcm79Q4AM67z/4OO+YWilbX\nIJBUjywlUDgun2dTAlQE27XBbyPSfXjhIPyzI/3m5MK2U1yCkZT1MifQTvE/f5AJhFuekniJ\nme+H/ONLbvLfTb5r6YGrTHzh33Raup8pJ9qatUtspvMf2tqRvPt+CFpNne2CInvXGld8GV2r\nOetj29cehPINW9S+N1G2N4xlc7woOuTGN2JjTMYLbFgG/gmvUDY6dfvvuV7kuCrFiKCw2Zj+\ncRrztaXI1Y1ILHbh9Fy8DvJKeokXBw4otd2YiZqDg85zxDgkpGeCQa+efm/WBB0WoN7o+lZL\nBEExN69HmaIRrSfgAv/ZoKNdb/0WocrHJ/7Rb0M="
+ !
+ authgroup default
+ device-type cli ned-id cisco-ios-cli-6.69
+ state admin-state unlocked
+ config
+  no service password-encryption
+  no cable admission-control preempt priority-voice
+  no cable qos permission create
+  no cable qos permission update
+  no cable qos permission modems
+  ip source-route
+  no ip cef
+  no ip forward-protocol nd
+  no ipv6 cef
+  no dot11 syslog
+ !
+!
+admin@ncs(config)# 
+```
+
+### Check the state of the devices
+
+```bash
+admin@ncs# show devices device state 
+devices device R0
+ state oper-state unknown
+devices device R1
+ state oper-state unknown
+```
+
+### Check the sync status of the devices
+
+```bash
+admin@ncs(config)# devices check-sync
+sync-result {
+    device R0
+    result unknown
+}
+sync-result {
+    device R1
+    result unknown
+}
+```
+
+As you can see both state and check-sync are unknown, so we need to first run the sync from the device for NSO to import devices current configuration into NSO. 
+
+### Run sync-from 
+
+```bash
+admin@ncs# devices sync-from 
+sync-result {
+    device R0
+    result true
+}
+sync-result {
+    device R1
+    result true
+}
+```
+
+Now the `netsim` devices are in sync state, let's check the state again. 
+
+```bash
+admin@ncs# show devices device state
+devices device R0
+ state oper-state    enabled
+ state transaction-mode ned
+ state last-transaction-id 8b4d5a2317f421fa0498afac619e0d0c
+devices device R1
+ state oper-state    enabled
+ state transaction-mode ned
+ state last-transaction-id 8b4d5a2317f421fa0498afac619e0d0c
+admin@ncs# 
+
+ ```
+
+Looks good, right, so we now have 'netsim' devices up and running and we can test our service packages and configuration. 
+
+I found another good article to create netsim devices from the real devices config, please check out the link below;
+
+##### How to create a NETSIM from real device configuration
+_https://community.cisco.com/t5/nso-developer-hub-blogs/how-to-create-a-netsim-from-real-device-configuration/ba-p/3663976_
+
 Here you Go ! 
 
-You learnt, how to added and delete 'netsim' virtual devices in NSO instance. 
+You learnt, how to add, delete and load 'netsim' virtual devices in NSO instance. 
 
 Next, we will explore how to work with `netsim` devices.
 
