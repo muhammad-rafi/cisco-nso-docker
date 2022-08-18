@@ -1,6 +1,6 @@
 ## How to add and delete netsim devices in NSO Instance
 
-##### Go to your NSO instance 
+### Go to your NSO instance 
 ```bash
 root@nso:~# cd ncs-instance/
 root@nso:~/ncs-instance# 
@@ -8,7 +8,7 @@ root@nso:~/ncs-instance#
 
 You can create a single IOS netsim device `R0` using the following command. 
 
-##### Create a Cisco IOS device 'R0' using 'cisco-ios-cli-6.69' ned
+### Create a Cisco IOS device 'R0' using 'cisco-ios-cli-6.69' ned
 
 `ncs-netsim create-device packages/cisco-ios-cli-6.69 R0`
 
@@ -50,7 +50,7 @@ Here is what you would need to avoid adding more devices with `R` name if you al
 
 Now, let's add more devices using 'cisco-ios-cli-6.69' ned in the current network, I am adding 2 more device 'CE0 and CE1'
 
-##### Add more devices 'CE0 and CE1' in the existing network using 'cisco-ios-cli-6.69' ned
+### Add more devices 'CE0 and CE1' in the existing network using 'cisco-ios-cli-6.69' ned
 
 `ncs-netsim add-to-network packages/cisco-ios-cli-6.69 2 CE`
 
@@ -115,7 +115,7 @@ root@nso:~/ncs-instance#
 
 You can also delete the network by follwoing command 
 
-#### Deleting the `netsim` network 
+### Deleting the `netsim` network 
 
 `ncs-netsim delete-network`
 
