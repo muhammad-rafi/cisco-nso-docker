@@ -81,6 +81,7 @@ If you like to explore what is inside those device name directory, check it out,
 
 Lets's explore 'R0'
 
+```bash
 root@nso:~/ncs-instance# ls -l netsim/R0/R0/
 total 9972
 -rw-r--r-- 1 root root     5230 Aug 18 11:47 aaa.fxs
@@ -110,7 +111,7 @@ drwxr-xr-x 2 root root     4096 May 23 18:54 ssh
 -rw-r--r-- 1 root root 10064822 Aug 18 11:47 tailf-ned-cisco-ios.fxs
 -rw-r--r-- 1 root root     5336 Aug 18 11:47 xml_parser.beam
 root@nso:~/ncs-instance# 
-
+```
 
 You can also delete the network by follwoing command 
 
@@ -131,3 +132,5 @@ Here you Go !
 You learnt, how to added and delete 'netsim' virtual devices in NSO instance. 
 
 Next, we will explore how to work with `netsim` devices.
+
+_Reference: https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2018/pdf/LABSPG-2442-LG.pdf_
