@@ -7,6 +7,10 @@ User admin last logged in 2022-07-13T15:19:15.750392+00:00, to nso, from 127.0.0
 admin connected from 127.0.0.1 using console on nso
 admin@ncs# 
 ```
+for more commands with ncs_cli, try with --help flag; 
+```
+root@nso:~# ncs_cli --help 
+```
 
 session variables in the CLI
 admin@ncs# show cli
@@ -14,15 +18,27 @@ admin@ncs# show cli
 You can run these command and display in json, xml some other available formats appending with " | display xml", " | display json". 
 e.g 
 
-`admin@ncs# show packages package package-version | display xml`
-`admin@ncs# show packages package package-version | display json`
-`admin@ncs# show packages package package-version | display xpath` 
-`admin@ncs# show packages package package-version | display restconf`
+```bash
+admin@ncs# show packages package package-version | display xml
+admin@ncs# show packages package package-version | display json
+admin@ncs# show packages package package-version | display xpath 
+admin@ncs# show packages package package-version | display restconf
+```
 
+Check the details of installed network element drivers (NEDs) and other service packages
+admin@ncs# show packages
 
-Show the installed network element drivers (NEDs) and other packages
-versions 
+Check the installed network element drivers (NEDs) and other packages versions 
 admin@ncs# show packages package package-version 
+
+Check packages operational status
+admin@ncs# show packages package * oper-status 
+
+Check the package templates  
+admin@ncs# show packages package templates
+
+Check the python service packages
+admin@ncs# show packages package python-package
 
 Show list of device along with NED and admin state
 admin@ncs# show devices list
