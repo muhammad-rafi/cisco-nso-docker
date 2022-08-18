@@ -127,6 +127,23 @@ DEVICE CE1 already STOPPED
 root@nso:~/ncs-instance# 
 ```
 
+Once you deleted the network, you will notice, 'netsim' folder would go away too. 
+
+```bash
+root@nso:~/ncs-instance# ls -l
+total 44
+-rw-r--r-- 1 root root   714 May 31 12:13 README.ncs
+drwxr-xr-x 2 root root  4096 Aug 18 10:37 logs
+drwxr-xr-x 2 root root  4096 Aug 18 10:37 ncs-cdb
+-rw-r--r-- 1 root root 10021 May 31 12:13 ncs.conf
+drwxr-xr-x 7 root root  4096 Aug  2 18:51 packages
+drwxr-xr-x 4 root root  4096 May 31 12:13 scripts
+drwxr-xr-x 5 root root  4096 Aug 18 10:38 state
+-rw-r--r-- 1 root root   289 Aug 18 10:38 storedstate
+drwxr-xr-x 3 root root  4096 May 31 12:14 target
+root@nso:~/ncs-instance# 
+```
+
 Here you Go ! 
 
 You learnt, how to added and delete 'netsim' virtual devices in NSO instance. 
