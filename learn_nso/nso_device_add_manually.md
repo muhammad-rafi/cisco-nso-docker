@@ -56,7 +56,7 @@ root@nso:~/ncs-instance#
 
 If you like to add more devices in the existing `netsim` network, you can run the follwoing command, you may add devices with different neds, however in this example, I use same `ios` ned, I used for adding a single ios device above.
 
-Note: Don't use `R` keyword again to add more devices if you already used R0 to add the single device before, otherwise you may get the unexpected results. just name them something other than `R`. 
+Note: Don't use `R` keyword again to add more devices if you already used R0 or R1 to add the single device or multiple devices before, otherwise you may get the unexpected results. just name them something other than `R`. 
 
 Here is what you would need to avoid adding more devices with `R` name if you already have R0 created before
 `ncs-netsim add-to-network packages/cisco-ios-cli-6.69 2 R`
