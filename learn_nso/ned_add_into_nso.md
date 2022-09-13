@@ -1,6 +1,6 @@
-# How to add Cisco NED (Network Eelement Drive) on Cisco NSO 
+# How to Add/Install Cisco NED (Network Eelement Drive) on Cisco NSO 
 
-I am using the Cisco NSO docker in this example which uses local install, if you have a system install, the directories may be on different locations, please check the official NSO docs. 
+I am using the Cisco NSO docker container in this example which uses local install, if you have a system install, the directories may be on different locations, please check the official NSO docs. 
 
 CWS (Candidate Work Station) - Based on Ubuntu 20.04.3 LTS
 
@@ -11,7 +11,7 @@ We will be adding new cisco IOSXR NED `cisco-iosxr-cli-7.33` in this example.
 Download the NED you need from the following link
 https://developer.cisco.com/docs/nso/#!getting-and-installing-nso/download-your-nso-free-trial-installer-and-cisco-neds
 
-I downloaded the IOSXR NED `ncs-5.5-cisco-iosxr-7.33.signed.bin` in the example. However you might see the different latest NED for the latest NSO version.
+I downloaded the IOSXR NED `ncs-5.5-cisco-iosxr-7.33.signed.bin` in this example. However you might see the different or latest NED for the latest NSO version.
 
 ### Step 2: Extract the IOSXR NED Binary
 
@@ -40,9 +40,9 @@ total 167464
 murafi@MURAFI-M-VC10:packages$
 ```
 
-### Step 2: Copy `ncs-5.5-cisco-iosxr-7.33.tar.gz` to your CWS from your local machine (macbook in my case)
+### Step 3: Copy `ncs-5.5-cisco-iosxr-7.33.tar.gz` to your CWS from your local machine (macbook in my case)
 
-Delete all the other files except `ncs-5.5-cisco-iosxr-7.33.tar.gz` and copy it over to your CWS or Ubuntu box where your NSO service or docker is running.
+Delete all the other files except `ncs-5.5-cisco-iosxr-7.33.tar.gz` and copy it over to your CWS or Ubuntu box where your NSO instance or docker is running.
 
 ```bash
 murafi@MURAFI-M-VC10:packages$ scp ncs-5.5-cisco-iosxr-7.33.tar.gz expert@localhost:~/nso/packages/
@@ -51,7 +51,7 @@ ncs-5.5-cisco-iosxr-7.33.tar.gz                                                 
 murafi@MURAFI-M-VC10:packages$ 
 ```
 
-### Step 3: Go to your CWS or Ubuntu Box and extract `ncs-5.5-cisco-iosxr-7.33.tar.gz`
+### Step 4: Go to your CWS or Ubuntu Box and extract `ncs-5.5-cisco-iosxr-7.33.tar.gz`
 
 Run `tar -zxvf ncs-5.5-cisco-iosxr-7.33.tar.gz`
 
@@ -82,7 +82,7 @@ drwxr-xr-x 9 expert expert     4096 Feb  4  2021 cisco-iosxr-cli-7.33
 (main) expert@expert-cws:~/nso/packages$ 
 ```
 
-## Copy the directory `cisco-iosxr-cli-7.33` to Cisco NSO docker or Service
+### Step 5: Copy the directory `cisco-iosxr-cli-7.33` to Cisco NSO docker or Instance
 
 Let's start the container and start the ncs instance, if it is currently in Exited state. 
 
@@ -126,7 +126,7 @@ drwxr-xr-x 5 root root  4096 Dec 21  2020 juniper-junos-nc-3.0
 root@nso:~# 
 ```
 
-You can see we do not have `cisco-iosxr-cli-7.33`, let's exit out of the nso docker and back to host and copy the new NED to this nso docker container.
+You can see we do not have `cisco-iosxr-cli-7.33`, let's exit out of the NSO container and back to host and copy the new NED to this nso docker container.
 
 `$ docker cp cisco-iosxr-cli-7.33 cisco-nso-dev:/root/nso-5.5/packages/neds/`
 
@@ -157,9 +157,9 @@ drwxr-xr-x 8 root root  4096 Dec 21  2020 dell-ftos-cli-3.0
 drwxr-xr-x 5 root root  4096 Dec 21  2020 juniper-junos-nc-3.0
 root@nso:~# 
 ```
-We can see that `cisco-iosxr-cli-7.33` has been copied over to the nso docker. 
+We can see that `cisco-iosxr-cli-7.33` has been copied over to the NSO docker container. 
 
-## Create a Symbolic (soft) link for `cisco-iosxr-cli-7.33` for the ncs instance 
+### Step 6: Create a Symbolic (soft) link for `cisco-iosxr-cli-7.33` for the ncs instance 
 
 As we are using ncs-instance in NSO, so NSO looks for directory under the `/root/ncs-instance/packages` for packages, therefore we need to create a symbolic link points to this directory.
 
@@ -189,7 +189,7 @@ root@nso:~/ncs-instance/packages#
 
 As you can see Symbolic link is created for the new NED, finally login to the NSO cli and reload the package. 
 
-## Reload Packages in NSO CLI 
+### Step 7: Reload Packages in NSO CLI 
 
 Login to the NSO cli and run `packages reload`
 
