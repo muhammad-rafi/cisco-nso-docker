@@ -103,3 +103,5 @@ admin@ncs# show running-config devices device cml-iosv config interface | displa
 admin@ncs# show running-config devices device cml-iosv config interface | display xpath | display prefixes 
 admin@ncs# show running-config devices device | display xpath
 ```
+
+## Reference: [The NSO CLI](https://developer.cisco.com/docs/nso/guides/#!the-nso-cli/the-nso-cli)
