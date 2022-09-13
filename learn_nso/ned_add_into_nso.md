@@ -9,6 +9,7 @@ We will be adding new cisco IOSXR NED `cisco-iosxr-cli-7.33` in this example.
 ### Step 1: Download the IOSXR NED Binary
 
 Download the NED you need from the following link
+
 https://developer.cisco.com/docs/nso/#!getting-and-installing-nso/download-your-nso-free-trial-installer-and-cisco-neds
 
 I downloaded the IOSXR NED `ncs-5.5-cisco-iosxr-7.33.signed.bin` in this example. However you might see the different or latest NED for the latest NSO version.
