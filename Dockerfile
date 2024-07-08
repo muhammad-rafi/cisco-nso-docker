@@ -62,3 +62,22 @@ COPY ${pwd}/packages/ncs-5.5-cisco* /root/nso-5.5/packages/neds/
 
 # Expose port required for Cisco NSO Server
 EXPOSE 2022 2024 8080 8888
+
+# docker run -it --hostname nso-dev --name cisco-nso-dev \
+# -p 2024:2024 \
+# -p 2022:2022 \
+# -p 8080:8080 \
+# -p 8888:8888 \
+# containers.cisco.com/nso-docker/cisco-nso-dev:6.1
+
+# # Use a base image (choose the appropriate base image)
+# FROM ubuntu:22.04
+
+# # Set environment variable for the zero interaction
+# ARG DEBIAN_FRONTEND=noninteractive
+
+# # Copy the NSO installation files to the container
+# COPY ${pwd}/nso-5.7.16.linux.x86_64.installer.bin /tmp/
+
+# # Expose port required for Cisco NSO Server
+# EXPOSE 2022 2024 8080 8888

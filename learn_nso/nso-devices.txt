@@ -1,0 +1,64 @@
+devices device cml-internet-rtr01
+address 10.100.5.201
+authgroup admin-group
+device-type cli ned-id cisco-ios-cli-6.69
+device-type cli protocol ssh
+ssh host-key-verification none
+state admin-state unlocked
+!
+devices device cml-edge-sw01
+address 10.100.5.202
+authgroup admin-group
+device-type cli ned-id cisco-ios-cli-6.69
+device-type cli protocol ssh
+ssh host-key-verification none
+state admin-state unlocked
+!
+devices device cml-core-rtr01
+address 10.100.5.203
+authgroup admin-group
+device-type cli ned-id cisco-iosxr-cli-7.33
+device-type cli protocol ssh
+ssh host-key-verification none
+state admin-state unlocked
+!
+devices device cml-core-rtr02
+address 10.100.5.204
+authgroup admin-group
+device-type cli ned-id cisco-iosxr-cli-7.33
+device-type cli protocol ssh
+ssh host-key-verification none
+state admin-state unlocked
+!
+devices device cml-dist-rtr01
+address 10.100.5.205
+authgroup admin-group
+device-type cli ned-id cisco-ios-cli-6.69
+device-type cli protocol ssh
+ssh host-key-verification none
+state admin-state unlocked
+!
+devices device cml-dist-rtr02
+address 10.100.5.206
+authgroup admin-group
+device-type cli ned-id cisco-ios-cli-6.69
+device-type cli protocol ssh
+ssh host-key-verification none
+state admin-state unlocked
+!
+devices device cml-dist-sw01
+address 10.100.5.207
+authgroup admin-group
+device-type cli ned-id cisco-nx-cli-5.21
+device-type cli protocol ssh
+ssh host-key-verification none
+state admin-state unlocked
+!
+devices device cml-dist-sw02
+address 10.100.5.208
+authgroup admin-group
+device-type cli ned-id cisco-nx-cli-5.21
+device-type cli protocol ssh
+ssh host-key-verification none
+state admin-state unlocked
+!

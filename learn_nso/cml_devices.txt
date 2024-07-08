@@ -1,0 +1,43 @@
+devices device cml-core-rtr01
+ address   10.251.13.203
+ ssh host-key-verification none
+ authgroup cmladmin
+ device-type cli ned-id cisco-iosxr-cli-7.55
+ device-type cli protocol ssh
+!
+devices device cml-core-rtr02
+ address   10.251.13.204
+ ssh host-key-verification none
+ authgroup cmladmin
+ device-type cli ned-id cisco-iosxr-cli-7.55
+ device-type cli protocol ssh
+!
+devices device cml-dist-rtr01
+ address   10.251.13.205
+ ssh host-key-verification none
+ authgroup cmladmin
+ device-type cli ned-id cisco-ios-cli-6.106
+ device-type cli protocol ssh
+!
+devices device cml-dist-rtr02
+ address   10.251.13.206
+ ssh host-key-verification none
+ authgroup cmladmin
+ device-type cli ned-id cisco-ios-cli-6.106
+ device-type cli protocol ssh
+!
+devices device cml-dist-sw01
+ address   10.251.13.207
+ ssh host-key-verification none
+ authgroup cmladmin
+ device-type cli ned-id cisco-nx-cli-5.25
+ device-type cli protocol ssh
+!
+devices device cml-dist-sw02
+ address   10.251.13.208
+ ssh host-key-verification none
+ authgroup cmladmin
+ device-type cli ned-id cisco-nx-cli-5.25
+ device-type cli protocol ssh
+ !
+!

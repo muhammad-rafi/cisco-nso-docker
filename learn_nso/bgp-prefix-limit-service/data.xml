@@ -1,0 +1,28 @@
+<device>
+  <name>cml-core-rtr01</name>
+  <config>
+    <router xmlns="http://tail-f.com/ned/cisco-ios-xr">
+      <bgp>
+        <bgp-no-instance>
+          <id>65001</id>
+          <neighbor>
+            <id>1.1.1.1</id>
+            <remote-as>200</remote-as>
+            <description>created by nso</description>
+            <address-family>
+              <ipv4>
+                <unicast>
+                  <maximum-prefix>
+                    <max-prefix-limit>50</max-prefix-limit>
+                    <threshold>90</threshold>
+                  </maximum-prefix>
+                </unicast>
+              </ipv4>
+            </address-family>
+          </neighbor>
+        </bgp-no-instance>
+      </bgp>
+    </router>
+  </config>
+</device>
+</devices>

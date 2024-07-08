@@ -1,0 +1,26 @@
+services:
+  cisco-nso-dev:
+    image: ubuntu:22.04
+    container_name: cisco-nso-dev
+    hostname: cisco-nso-dev
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin
+    ports:
+      - "2024:2024"
+      - "2022:2022"
+      - "8081:8080"
+      - "8888:8888"
+    volumes:
+      - "./nso-6.3.linux.x86_64.installer.bin:/root/nso-6.3.linux.x86_64.installer.bin"
+      - ./packages:/root/neds
+#      - ./ncs-instance:/root/ncs-instance
+    networks:
+      - nso_network
+#    entrypoint: ["/root/entrypoint.sh"]
+    command: tail -f /dev/null  # Keeps the container running
+
+networks:
+  nso_network:
+    driver: bridge

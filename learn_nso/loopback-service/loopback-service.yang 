@@ -1,0 +1,72 @@
+module loopback-service {
+  namespace "http://com/example/loopbackservice";
+  prefix loopback-service;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  import tailf-common {
+    prefix tailf;
+  }
+
+  list loopback-service {
+    key name;
+
+    uses ncs:service-data;
+    ncs:servicepoint "loopback-service";
+
+    leaf name {
+      tailf:info "Loopback Service Instance Name";
+      type string;
+    }
+
+    // may replace this with other ways of refering to the devices.
+    leaf-list device {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+    }
+
+    // replace with your own stuff here
+    leaf intf-id {
+      tailf:info "Loopback interface ID";
+      type uint32;
+      mandatory true;
+    }
+
+    leaf intf-desc {
+      tailf:info "Interface description";
+      type string;
+    }
+
+    leaf ipv4-addr {
+      tailf:info "IPv4 address";
+      type inet:ipv4-address;
+    }
+
+    leaf ipv4-mask {
+      tailf:info "IPv4 subnet mask";
+      type string {
+        pattern '((255\.(0|128|192|224|240|248|252|254|255)\.0\.0)|' +
+                '(255\.(255\.(0|128|192|224|240|248|252|254|255)\.0))|' +
+                '(255\.(255\.(255\.(0|128|192|224|240|248|252|254|255))))|' +
+                '(255\.(255\.(255\.(255)))))';
+      }
+    }
+
+    leaf ipv6-prefix {
+      tailf:info "IPv6 prefix";
+      type inet:ipv6-prefix;
+    }
+
+    leaf enabled {
+      tailf:info "Enable loopback interface. If false, interface will be shutdown.";
+      type boolean;
+      default true;
+    }
+  }
+}

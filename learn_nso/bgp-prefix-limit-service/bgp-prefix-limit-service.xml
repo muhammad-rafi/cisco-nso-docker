@@ -1,0 +1,43 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+      <name>{/device}</name>
+      <config>
+        <router xmlns="http://tail-f.com/ned/cisco-ios-xr" tags="nocreate">
+          <bgp>
+            <bgp-no-instance>
+              <id>{$LOCAL_AS}</id>
+              <neighbor tags="merge">
+                <id>{$NEIGHBOR_ADDRESS}</id>
+                <remote-as>{$REMOTE_AS}</remote-as>
+                <!-- Conditional description -->
+                <?if {$DESCRIPTION != 'None'} ?>
+                <description>{$DESCRIPTION}</description>
+                <?end ?>
+                <!-- Address family conditional -->
+                <address-family>
+                  <ipv4 when="{$ADDRESS_FAMILY='ipv4'}">
+                    <unicast>
+                      <maximum-prefix>
+                        <max-prefix-limit>{$PREFIX_LIMIT}</max-prefix-limit>
+                        <threshold>{$PREFIX_THRESHOLD}</threshold>
+                      </maximum-prefix>
+                    </unicast>
+                  </ipv4>
+                  <ipv6 when="{$ADDRESS_FAMILY='ipv6'}">
+                    <unicast>
+                      <maximum-prefix>
+                        <max-prefix-limit>{$PREFIX_LIMIT}</max-prefix-limit>
+                        <threshold>{$PREFIX_THRESHOLD}</threshold>
+                      </maximum-prefix>
+                    </unicast>
+                  </ipv6>
+                </address-family>
+              </neighbor>
+            </bgp-no-instance>
+          </bgp>
+        </router>
+      </config>
+    </device>
+  </devices>
+</config-template>

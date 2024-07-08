@@ -1,5 +1,41 @@
 # Some Useful Commands for the NSO
 
+Start NSO Instance 
+
+Go the instance and start/reload NSC instance 
+# cd ncs-instance or cd nso-instance
+# ncs
+# ncs --foreground 
+# ncs --foreground --verbose
+# ncs --reload
+
+Check NSO/NCS Logs
+`tail -f ncs-instance/logs/ncs.log`
+
+Source the ncsrc file in the NSO installation directory to set up a local environment
+```shell
+$ source ~/nso-6.0/ncsrc
+```
+
+Check NSO status
+`ncs --status`
+
+```shell
+root@cisco-nso-dev:/# ncs --status | grep status
+status: started
+        db=running id=33 priority=1 path=/ncs:devices/device/live-status-protocol/device-type
+root@cisco-nso-dev:/# 
+```
+
+```shell
+root@cisco-nso-dev:/# ncs_cli -C -u admin
+
+admin connected from 127.0.0.1 using console on cisco-nso-dev
+admin@ncs# 
+admin@ncs# 
+admin@ncs# show ncs-state
+```
+
 Login to NSO CLI mode from the NSO bash `ncs_cli -C -u admin`
 
 ```shell
@@ -104,4 +140,10 @@ admin@ncs# show running-config devices device cml-iosv config interface | displa
 admin@ncs# show running-config devices device | display xpath
 ```
 
-## Reference: [The NSO CLI](https://developer.cisco.com/docs/nso/guides/#!the-nso-cli/the-nso-cli)
+## Reference: 
+
+[The NSO CLI](https://developer.cisco.com/docs/nso/guides/#!the-nso-cli/the-nso-cli)
+
+[NSO System Management](https://developer.cisco.com/docs/nso/guides/nso-system-management/#nso-system-management)
+
+[Running NSO Examples](https://developer.cisco.com/docs/nso/guides/running-nso-examples/#running-nso-examples)

@@ -1,0 +1,106 @@
+module bgp-prefix-limit-service {
+  namespace "http://example.com/bgp-prefix-limit-service";
+  prefix bgp-prefix-limit-service;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  
+  import tailf-common {
+    prefix tailf;
+  }
+
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  description 
+    "BGP Max Prefix Limit Service YANG Model";
+
+  revision 2024-07-05 {
+    description
+      "Initial revision.";
+  }
+
+  list bgp-prefix-limit-service {
+    description "BGP Max Prefix Limit Service Configuration";
+    key name;
+
+    leaf name {
+      tailf:info "Unique service id";
+      tailf:cli-allow-range;
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint bgp-prefix-limit-service-servicepoint;
+
+    leaf device {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+    }
+
+    list neighbors {
+      tailf:info "BGP Neighbor Configuration";
+      key neighbor-address;
+      description "List of BGP neighbors";
+
+      leaf neighbor-address {
+        tailf:info "IPv4 or IPv6 Neighbor Address";
+        type inet:ip-address;
+        mandatory true;
+        description "BGP Neighbor IP Address";
+      }
+
+      leaf description {
+        tailf:info "Description for BGP Neighbor(optional)";
+        type string;
+        description "BGP Neighbor description";
+      }
+
+      leaf remote-as {
+        tailf:info "Remote BGP AS number";
+        type uint32;
+        mandatory true;
+        description "Remote BGP AS number";
+      }
+
+      choice address-family {
+        mandatory true;
+        description "Address family for the BGP neighbor";
+
+        case ipv4 {
+          leaf ipv4-unicast {
+            tailf:info "IPv4 unicast address family";
+            type empty;
+            description "IPv4 unicast address family";
+          }
+        }
+        case ipv6 {
+          leaf ipv6-unicast {
+            tailf:info "IPv6 unicast address family";
+            type empty;
+            description "IPv6 unicast address family";
+          }
+        }
+      }
+
+      leaf prefix-limit {
+        tailf:info "Maximum Prefix Limit for BGP Neighbor";
+        type uint32;
+        mandatory true;
+        description "Max Prefix limit";
+      }
+
+      leaf prefix-threshold {
+        tailf:info "BGP Prefix threshold, default is 75";
+        type uint8 {
+            range '1..100';
+        }
+        default 75;
+        description "Prefix threshold percentage";
+      }
+    }
+  }
+}

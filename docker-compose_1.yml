@@ -1,0 +1,41 @@
+services:
+  cisco-nso-dev:
+    image: ubuntu:22.04
+    container_name: cisco-nso-dev
+    hostname: cisco-nso-dev
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin
+    ports:
+      - "2024:2024"
+      - "2022:2022"
+      - "8081:8080"
+      - "8888:8888"
+    volumes:
+      - "./nso-6.3.linux.x86_64.installer.bin:$HOME/nso-6.3.linux.x86_64.installer.bin"
+      - "./packages:$HOME/neds"
+      - "./ncs-instance:$HOME/ncs-instance"
+      - "./nso-6.3:$HOME/nso-6.3"
+      - "./entrypoint.sh:${HOME}/entrypoint.sh:rw" 
+    networks:
+      - nso_network
+    # entrypoint: ["~/entrypoint.sh"]
+    # command: ["sh", "-c", "${HOME}/entrypoint.sh"]
+    # command: /bin/bash -c "chmod +x /root/entrypoint.sh && /root/entrypoint.sh"
+    command: tail -f /dev/null 
+    healthcheck:
+      test: ["CMD", "ncs_cmd", "-c", "get_phase"]
+      start_period: 60s
+      interval: 5s
+      retries: 3
+      timeout: 5s
+
+networks:
+  nso_network:
+    driver: bridge
+
+# docker-compose -f docker-compose_1.yml up -d
+# docker-compose -f docker-compose_1.yml down
+# docker-compose -f docker-compose_1.yml logs
+# docker-compose -f docker-compose_1.yml logs -f
