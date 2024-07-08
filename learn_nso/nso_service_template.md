@@ -1,9 +1,11 @@
 #### Template-based service
 
+```sh
 cd ~/ncs-instance/packages
 ncs-make-package --service-skeleton template loopback-service
 cd loopback-service
 tree
+```
 
 ```sh
 root@cisco-nso-dev:~# cd ~/ncs-instance/packages
@@ -110,12 +112,12 @@ root@cisco-nso-dev:~/ncs-instance/packages/loopback-service#
 ```
 
 After you have the above output, identify the hardcoded values between the <config> tags and convert them into variable. 
-- <name>99</name> --> intf_name
-- <description>nso service</description> --> intf_desc
-- <address>99.99.99.99</address> --> ipv4_addr
-- <mask>255.255.255.255</mask> --> ipv4_mask
-- <prefix>2001:db8::1/128</prefix> ipv6_prefix
-- <shutdown/> intf_state
+- <name>99</name> --> intf-name
+- <description>nso service</description> --> intf-desc
+- <address>192.0.2.1</address> --> ipv4-addr
+- <mask>255.255.255.255</mask> --> ipv4-mask
+- <prefix>2001:db8::1/128</prefix> ipv6-prefix
+- <shutdown/> enabled (boolean)
 
 Now, edit the service template xml file `loopback-service-template.xml` and place these variables after the device tag.
 
@@ -149,6 +151,8 @@ Note: use {/var} where var is the variable name.
   </interface>
 </config>
 ```
+
+Notice that I have added `<?if {/enabled = 'false'}?>` before the `<shutdown/>`, this is to cover if user want to configure the interface with state down to begin with. 
 
 ```sh
 root@cisco-nso-dev:~/ncs-instance/packages/loopback-service# vi templates/loopback-service-template.xml 
@@ -506,7 +510,7 @@ Commit complete.
 admin@ncs(config-loopback-service-ios-lb-service)# 
 ```
 
-As you can new Loopback 99 has been created on the device 
+As you can see new 'Loopback 99' has been created on the device 
 ```sh
 cml-dist-rtr01#sh ip int br | i Loop
 Loopback0              10.0.0.5        YES NVRAM  up                    up      
@@ -545,7 +549,7 @@ devices device cml-dist-rtr01
 !
 ```
 
-Lets's rollback the configuration for clean up. You can simply rollback last configuration by entering the 'rollback configuration' command and run the 'dryrun' to verify.
+Lets's rollback the configuration for clean up. You can simply rollback last configuration by running the 'rollback configuration' command and run the 'commit dry-run' to verify.
 
 ```sh
 admin@ncs(config)# rollback configuration ?
@@ -608,11 +612,11 @@ devices device cml-dist-rtr01
 !
 ```
 
-As you can see, Loopback 99 has been removed from the cml-dist-rtr01.
+As you can see, 'Loopback 99' has been removed from the cml-dist-rtr01.
 
 Reference:
 [Introduction to NSO Service Development](https://developer.cisco.com/learning/modules/nso-service-dev/service-dev-101/introduction/)
 
 [Create a Template-Based Service](https://developer.cisco.com/learning/modules/nso-service-dev/service-dev-101/create-a-template-based-service/)
 
-[NSO Nano Service Development](https://developer.cisco.com/learning/labs/service-dev-301/introduction/)
+[Conditional statements](https://developer.cisco.com/docs/nso/guides/templates/#conditional-statements)
