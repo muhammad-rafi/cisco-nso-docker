@@ -13,6 +13,7 @@ openssl \
 libexpat1 \
 libxml2-utils \
 libxml2 \
+lxml \
 xsltproc \
 build-essential \
 ant \
